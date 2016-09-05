@@ -18,5 +18,15 @@ module.exports = [
         pattern: '/items',
         methods: ['GET'],
         action: 'items::getAction'
+    },
+    {
+        pattern: '/public/js/extjs.js',
+        methods: ['GET'],
+        action: 'extfile::getjs'
+    },
+    {
+        pattern: '/public/css/extcss.css',
+        methods: ['GET'],
+        action: 'extfile::getcss'
     }
 ];
