@@ -3,7 +3,8 @@ var projectDir = __dirname,
         project: projectDir,
         controllers: projectDir + '/controllers',
         templates: projectDir + '/templates',
-        routes: projectDir + '/routes'
+        routes: projectDir + '/routes',
+        extfile: projectDir + '/publics' 
     };
 
 var Config = {
@@ -18,7 +19,8 @@ var Config = {
     controllers: {
         home: directories.controllers + '/home',
         form: directories.controllers + '/form',
-        items: directories.controllers + '/items'
+        items: directories.controllers + '/items',
+        extfile: directories.controllers + '/extfile'
     },
 
     getController: function(name) {

@@ -1,0 +1,75 @@
+body {
+            background-color: white;
+            font-family: Verdana;
+            font-size: 13px;
+        }
+        
+        label {
+            display: block;
+            padding-bottom: 10px;
+        }
+        input{
+            margin-bottom: 10px;
+            padding: 10px 10px;
+            width:480px;
+        }
+        fieldset{
+            width: 100%;
+            padding: 30px;
+        }
+        .itemsForm{
+            width: 500px;
+            margin: auto;
+        }
+        .input-wrapper{
+            width:100%;
+            font-size:16px;
+        }
+        legend{
+            font-size:20px;
+            font-family: Verdana;
+        }
+        button {
+            width: 100%;
+            background-color: #4da5ff;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            font-family: Verdana;
+            font-size: 14px;
+            margin-top: 10px;
+
+        }
+        button:hover {
+            background-color: #1a8bff;
+        }
+        .validateMsg{
+            color:red;
+            margin-bottom: 10px;
+        }
+        .listItems{
+            margin: auto;
+            width:800px;
+            text-align: left;
+            border-spacing: 0;
+            border: 1px solid grey;
+           
+        }         
+        .header{
+            font-size: 16px;
+         }
+        #items-table{
+            margin: auto;
+            width: 100%;
+            max-width: 768px;
+            text-align: left;
+        }
+        #items-table td {
+            border-top: 1px solid #E1E1E1;
+            padding: 1.5%;
+        }
+        #items-table th {
+            padding: 1.5%;
+        }
