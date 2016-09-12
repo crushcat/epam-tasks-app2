@@ -1,6 +1,6 @@
     var form = document.getElementById("itemForm");
     //form.onsubmit = onFormSubmit;
-    form.addEventListener("submit",onFormSubmit);
+    //form.addEventListener("submit",onFormSubmit);
     document.getElementById("fEmail").onchange = function(){validateData(form,true)};
     document.getElementById("fPhone").onchange = function(){validateData(form,true)};
 
@@ -22,7 +22,7 @@
         }
     };
 
-    function onFormSubmit(event){
+    function onFormSubmit(oFormElement){
         if(validateData(this,false)){
             var rqst = new XMLHttpRequest();
             rqst.open("POST", "/items");
@@ -39,9 +39,10 @@
                 clearForm();
             }
                 };
-            rqst.send(getFormData(form));
+            //rqst.send(getFormData(form));
+            rqst.send(new FormData(oFormElement));
         }
-     //   return true;
+    //    return true;
     }
 
     function getFormData(form){

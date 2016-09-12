@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="/publics/styles.css">
-    
+    <script defer type="text/javascript" src = "/publics/ext.js"></script>
     <title>Form</title>
 </head>
 <body>
 
-    <form id="itemForm" name="itemsForm"  class='itemsForm' method="POST" action="/items" >
+    <form id="itemForm" name="itemsForm"  class='itemsForm' method="post" action="/items" onsubmit="onFormSubmit(this); return false;">
         <!--onsubmit="onFormSubmit(this); return false;"-->
         <fieldset>
             <legend>Add Item</legend>
@@ -33,7 +33,7 @@
 
     <div id="listItems" class="listItems"></div>
 
-    <script  type="text/javascript" src = "/publics/ext.js"></script>
+    
 
 
 </body>
