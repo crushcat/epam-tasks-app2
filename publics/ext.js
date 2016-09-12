@@ -1,16 +1,20 @@
 'use strict';
 let form = document.forms.itemsForm;
 form.onsubmit = onFormSubmit;
-form.email.onchange = function(){validateData(form,true)};
-form.phone.onchange = function(){validateData(form,true)};
+form.email.onchange = function() {
+    validateData(form, true)
+};
+form.phone.onchange = function() {
+    validateData(form, true)
+};
 
 let rqst = new XMLHttpRequest();
 rqst.open('GET', '/items', true);
 rqst.onreadystatechange = onRequest;
 rqst.send();
 
-function onRequest(){
-    if (this.readyState !== 4){
+function onRequest() {
+    if (this.readyState !== 4) {
         return;
     }
     if (this.status !== 200) {
@@ -23,52 +27,49 @@ function onRequest(){
     }
 }
 
-function onFormSubmit(event){
-    if(validateData(this,false)){
+function onFormSubmit(event) {
+    if (validateData(this, false)) {
         let rqst = new XMLHttpRequest();
         rqst.open('POST', '/items');
-        rqst.onreadystatechange = function(){
-            if ( 4 !== rqst.readyState ) {
-            return;
-            }
-            if ( 200 !== rqst.status ) {
+        rqst.onreadystatechange = function() {
+            if (4 !== rqst.readyState) {
                 return;
             }
-            else{
+            if (200 !== rqst.status) {
+                return;
+            } else {
                 let item = JSON.parse(this.responseText);
                 addSingleItem(item, document.getElementById('items-table'));
                 clearForm();
             }
         }
         rqst.send(getFormData(form));
-        
+
     }
     return false;
 }
 
-function getFormData(form){
+function getFormData(form) {
     let output = '';
-    for (let i=1; i<form.length; i++){
-        if (form[i].type === 'text'){
-            output += (i===1?'':'&') + form[i].name + '=' + encodeURIComponent(form[i].value);
+    for (let i = 1; i < form.length; i++) {
+        if (form[i].type === 'text') {
+            output += (i === 1 ? '' : '&') + form[i].name + '=' + encodeURIComponent(form[i].value);
         }
     }
     return output;
 }
 
-function addSingleItem(item, table){
-    if (table.children.length<1) {
+function addSingleItem(item, table) {
+    if (table.children.length < 1) {
         createTblHeader(table);
     }
     let h_row = document.createElement('tr');
     h_row.itemId = item.id;
     let rowNo = document.createElement('td');
     rowNo.innerText = table.childNodes.length;
-    //rowNo.setAttribute('class','rowNo');
     h_row.appendChild(rowNo);
-    //h_row.appendChild(document.createElement('td'));
-    for(let key in item) {
-        if(item.hasOwnProperty(key) && key !== 'id'){
+    for (let key in item) {
+        if (item.hasOwnProperty(key) && key !== 'id') {
             h_row.appendChild(document.createElement('td')).innerText = item[key];
         }
     }
@@ -83,11 +84,11 @@ function addSingleItem(item, table){
     table.appendChild(h_row);
 }
 
-function removeSingleItem(itemId){
+function removeSingleItem(itemId) {
     let table = document.getElementById('items-table');
     let rows = table.children;
-    for(let i=1; i<rows.length; i++){
-        if(rows[i].itemId === itemId ) {
+    for (let i = 1; i < rows.length; i++) {
+        if (rows[i].itemId === itemId) {
             table.children[i].parentElement.removeChild(table.children[i]);
             recompileNo(rows)
             return true;
@@ -95,86 +96,82 @@ function removeSingleItem(itemId){
     }
     return false;
 }
-function createTblHeader(table){
+
+function createTblHeader(table) {
     let header = document.createElement('tr');
-    header.setAttribute('class','header');
-    header.appendChild(document.createElement('th')).innerText= '#';
-    header.appendChild(document.createElement('th')).innerText= 'Name';
-    header.appendChild(document.createElement('th')).innerText= 'Email';
-    header.appendChild(document.createElement('th')).innerText= 'Phone';
-    header.appendChild(document.createElement('th')).innerText= 'Remove';
+    header.setAttribute('class', 'header');
+    header.appendChild(document.createElement('th')).innerText = '#';
+    header.appendChild(document.createElement('th')).innerText = 'Name';
+    header.appendChild(document.createElement('th')).innerText = 'Email';
+    header.appendChild(document.createElement('th')).innerText = 'Phone';
+    header.appendChild(document.createElement('th')).innerText = 'Remove';
     table.appendChild(header);
 }
 
-function refreshItems(items){
+function refreshItems(items) {
     let t_div = document.getElementById('listItems');
     t_div.innerHTML = '';
     let table = document.createElement('table');
-    table.setAttribute('id','items-table');
-    if (items.length>0) {
+    table.setAttribute('id', 'items-table');
+    if (items.length > 0) {
         createTblHeader(table);
         t_div.appendChild(table);
-
-        for (let i=0; i<items.length; i++) {
-            addSingleItem(items[i],table);
-
+        for (let i = 0; i < items.length; i++) {
+            addSingleItem(items[i], table);
         }
     }
     t_div.appendChild(table);
-    
+
 }
 
-function recompileNo(rows){
-    for(let i=1; i<rows.length; i++) {
+function recompileNo(rows) {
+    for (let i = 1; i < rows.length; i++) {
         rows[i].cells[0].innerText = i;
-        
     }
 }
 
-function removeRow () {
+function removeRow() {
     let rId = window.event.target.id;
     removeData(rId);
     removeSingleItem(rId);
 }
 
-function removeData (id) {
+function removeData(id) {
     let rqst = new XMLHttpRequest();
-    rqst.open('DELETE', '/items?id='+id);
-    rqst.onreadystatechange = function(){
-        if (this.readyState !== 4){
+    rqst.open('DELETE', '/items?id=' + id);
+    rqst.onreadystatechange = function() {
+        if (this.readyState !== 4) {
             return;
         }
         if (this.status !== 200) {
             return;
+        } else {
+            //    let item = JSON.parse(this.responseText);
         }
-        else{
-            let item = JSON.parse(this.responseText);
-        }
-        
     };
     rqst.send();
     return;
 }
 
 
-function clearForm(){
-    for (let i=0; i<form.length; i++){
-        if (form[i].type === 'text'){
+function clearForm() {
+    for (let i = 0; i < form.length; i++) {
+        if (form[i].type === 'text') {
             form[i].value = '';
         }
     }
 }
 
-function validateData(form, onchange){
+function validateData(form, onchange) {
     let valid = true;
     let vEmail = form.email.value;
     let vPhone = form.phone.value;
     wipeMsgs();
-    if(!isValidEmail(vEmail)){
+    if (!isValidEmail(vEmail)) {
         setValidateMsg('Please enter valid email', 'fEmail');
         valid = false;
     }
-    if(!isValidPhone(vPhone)){
+    if (!isValidPhone(vPhone)) {
         setValidateMsg('Please enter valid phone number', 'fPhone');
         valid = false;
     }
@@ -182,27 +179,26 @@ function validateData(form, onchange){
 }
 
 function isValidPhone(phone) {
-    return (!!phone.match(/^\+375\d{9}$/) || !!phone.match(/^8017\d{7}$/)) ;
+    return (!!phone.match(/^\+375\d{9}$/) || !!phone.match(/^8017\d{7}$/));
 }
 
 function isValidEmail(email) {
     return !!(email.match(/^(\w|\.)+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/));
 }
 
-function setValidateMsg(msg, id){
+function setValidateMsg(msg, id) {
     let msgBox = document.createElement('div');
-    msgBox.setAttribute('class','validateMsg');
+    msgBox.setAttribute('class', 'validateMsg');
     msgBox.innerText = msg;
     document.getElementById(id).appendChild(msgBox);
 }
 
-function wipeMsgs(){
+function wipeMsgs() {
     let boxes = document.getElementsByTagName('div');
     for (let i = 0; i < boxes.length; i++) {
-        if(boxes[i].getAttribute('class') === 'validateMsg'){
+        if (boxes[i].getAttribute('class') === 'validateMsg') {
             boxes[i].parentNode.removeChild(boxes[i]);
             i--;
         }
-
     }
 }
