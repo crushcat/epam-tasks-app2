@@ -1,4 +1,5 @@
-var fs = require('fs'),
+'use strict';
+let fs = require('fs'),
     qs = require('querystring'),
     config = require('../config');
 
@@ -39,18 +40,18 @@ exports.postAction = function (request, response, pathname, postData) {
 };
 
 exports.deleteAllAction = function (request, response, pathname) {
-    var deleteData = qs.parse(request.url.trim().replace(/.*\?/, ''));
-    var deleteId = [];
+    let deleteData = qs.parse(request.url.trim().replace(/.*\?/, ''));
+    let deleteId = [];
 
     deleteData.id && (deleteId = deleteData.id.split(','));
 
     if (deleteId.length) {
         fs.readFile(config.database.path, function (err, data) {
-            var deletedItems = [];
+            let deletedItems = [];
 
             data = err || !data ? [] : JSON.parse(data.toString('utf8'));
             data = data.filter(function (item) {
-                var c = deleteId.indexOf(item.id) < 0;
+                let c = deleteId.indexOf(item.id) < 0;
 
                 !c && (deletedItems.push(item));
 
