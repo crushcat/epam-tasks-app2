@@ -1,5 +1,6 @@
-    var form = document.getElementById("itemForm");
-    //form.onsubmit = onFormSubmit;
+    //var form = document.getElementById("itemForm");
+    var form = document.forms.itemsForm;
+    form.onsubmit = onFormSubmit;
     //form.addEventListener("submit",onFormSubmit);
     document.getElementById("fEmail").onchange = function(){validateData(form,true)};
     document.getElementById("fPhone").onchange = function(){validateData(form,true)};
@@ -22,7 +23,7 @@
         }
     };
 
-    function onFormSubmit(oFormElement){
+    function onFormSubmit(event){
         if(validateData(this,false)){
             var rqst = new XMLHttpRequest();
             rqst.open("POST", "/items");
@@ -39,10 +40,10 @@
                 clearForm();
             }
                 };
-            //rqst.send(getFormData(form));
-            rqst.send(new FormData(oFormElement));
+            rqst.send(getFormData(form));
+            
         }
-    //    return true;
+        return false;
     }
 
     function getFormData(form){
