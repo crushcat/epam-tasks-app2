@@ -38,3 +38,6 @@ node_modules
 *.sublime-project
 
 vim.exe.stackdump
+
+diagnostic.data
+WiredTiger*Log
