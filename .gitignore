@@ -36,3 +36,5 @@ node_modules
 .DS_Store
 *.sublime-workspace
 *.sublime-project
+
+vim.exe.stackdump

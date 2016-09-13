@@ -1,4 +1,5 @@
-var fs = require('fs'),
+'use strict';
+let fs = require('fs'),
     config = require('../config');
 
 exports.getAction = function(request, response) {
