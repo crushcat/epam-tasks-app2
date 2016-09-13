@@ -1,5 +1,4 @@
 'use strict';
-(function(){
 let fs = require('fs'),
     qs = require('querystring'),
     config = require('../config');
@@ -84,4 +83,3 @@ exports.deleteAllAction = function (request, response, pathname) {
     }
 
 };
-})();

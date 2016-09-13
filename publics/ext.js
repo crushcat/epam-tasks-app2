@@ -1,4 +1,5 @@
 'use strict';
+(function(){
 let form = document.forms.itemsForm;
 form.onsubmit = onFormSubmit;
 form.email.onchange = function() {
@@ -202,3 +203,4 @@ function wipeMsgs() {
         }
     }
 }
+})();
