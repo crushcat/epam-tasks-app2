@@ -5,23 +5,36 @@ let fs = require('fs'),
 
 let db = require('./dbMongo');
 
-/*exports.getAction = function (request, response) {
-    fs.exists(config.database.path, function (isExists) {
-        response.writeHead(200, {'Content-Type': 'application/json'});
-
-        if (false === isExists) {
-            response.end(JSON.stringify([]));
-
-        } else {
-            fs.createReadStream(config.database.path).pipe(response);
-        }
-    });
-};*/
-
 exports.getAction = function(request, response) {
-    db.queryAll(function(err, data){
+    /*db.queryAll(function(err, data){
         console.log(JSON.stringify(data));
-    });
+    });*/
+    let database = null;
+    let resJ = '';
+    db.connect()
+        .then((db) => {
+            database = db;
+            return db.collection('usercollection');
+        })
+        .then((collection) => {
+            let qAll = collection.find();
+            return qAll;
+        })
+        .then((qAll) => {
+            let resArray = qAll.toArray();
+            return resArray;
+        })
+        .then((resArray) => {
+            response.writeHead(200, {
+                'Content-Type': 'application/json'
+            });
+            resJ = JSON.stringify(resArray);
+            response.end(resJ);
+            database.close();
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 };
 
 exports.postAction = function(request, response, pathname, postData) {

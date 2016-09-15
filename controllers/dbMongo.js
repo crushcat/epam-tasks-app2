@@ -7,24 +7,20 @@ exports.echo = function() {
     console.log('dbMongo.echo');
 };
 
-exports.queryAll = function(callback) {
-    dbClient.connect(dbPath, function(err, db) {
-        let collection = db.collection('usercollection').find().toArray(callback);
-        db.close();
-    });
-};
-/*dbClient.connect(dbPath, function(err, db) {
-        //assert.equal(null, err);
-        console.log("Connected correctly to server.");
-        let cursor = db.collection('usercollection').find(function(err, data){
-            console.log(JSON.stringify(data));
+exports.connect = function() {
+   return new Promise(function(resolve, reject){
+        dbClient.connect(dbPath, (err, db) => {
+            if (err) {
+                reject(err)
+            } else{
+                resolve(db);
+            }
         });
+    })
+};
 
-        var collection = db.collection("usercollection");
-            collection.find().toArray(function(err, data){
-                console.log(JSON.stringify(data));
-            });
-        console.log("DB Success");
+exports.close = function(db){
+    if(db){
         db.close();
-    });
-*/
+    }
+}

@@ -41,3 +41,5 @@ vim.exe.stackdump
 
 diagnostic.data
 WiredTiger*Log
+journal
+db
