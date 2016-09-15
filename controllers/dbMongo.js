@@ -13,13 +13,15 @@ exports.connect = function() {
             if (err) {
                 reject(err)
             } else{
-                resolve(db);
+                let resAll = db.collection('usercollection').find().toArray();
+                close(db);
+                resolve(resAll);
             }
         });
     })
 };
 
-exports.close = function(db){
+function close (db){
     if(db){
         db.close();
     }
