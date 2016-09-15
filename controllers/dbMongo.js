@@ -1,4 +1,5 @@
 'use strict'
+let dbM = require('mongodb');
 let dbClient = require('mongodb').MongoClient;
 let dbPath = 'mongodb://127.0.0.1:27017/epam-task-app2';
 let assert = require('assert');
@@ -7,7 +8,7 @@ exports.echo = function() {
     console.log('dbMongo.echo');
 };
 
-exports.connect = function() {
+exports.getAll = function() {
    return new Promise(function(resolve, reject){
         dbClient.connect(dbPath, (err, db) => {
             if (err) {
@@ -20,6 +21,34 @@ exports.connect = function() {
         });
     })
 };
+
+exports.insert = function(obj){
+    return new Promise(function(resolve, reject){
+        dbClient.connect(dbPath, (err, db) => {
+            if (err) {
+                reject(err)
+            } else{
+                let resIns = db.collection('usercollection').insertOne(obj);
+                close(db);
+                resolve(resIns);
+            }
+        });
+    })
+}
+
+exports.delete = function(dId){
+    return new Promise(function(resolve, reject){
+        dbClient.connect(dbPath, (err, db) => {
+            if (err) {
+                reject(err)
+            } else{
+                let resDel = db.collection('usercollection').deleteOne({'_id':new dbM.ObjectID(dId)});
+                close(db);
+                resolve(resDel);
+            }
+        });
+    })
+}
 
 function close (db){
     if(db){
