@@ -65,18 +65,18 @@
             createTblHeader(table);
         }
         let h_row = document.createElement('tr');
-        h_row.itemId = item.id;
+        h_row.itemId = item._id;
         let rowNo = document.createElement('td');
         rowNo.innerText = table.childNodes.length;
         h_row.appendChild(rowNo);
         for (let key in item) {
-            if (item.hasOwnProperty(key) && key !== 'id') {
+            if (item.hasOwnProperty(key) && key !== 'id' && key !== '_id') {
                 h_row.appendChild(document.createElement('td')).innerText = item[key];
             }
         }
         let rmvAnch = document.createElement('a');
         rmvAnch.setAttribute('href', '#');
-        rmvAnch.setAttribute('id', item.id);
+        rmvAnch.setAttribute('id', item._id);
         rmvAnch.appendChild(document.createTextNode('Remove'));
         rmvAnch.addEventListener('click', removeRow, false);
         let rmvCell = document.createElement('td');

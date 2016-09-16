@@ -3,7 +3,7 @@ let fs = require('fs'),
     config = require('../config');
 
 exports.getFile = function(request, response) {
-console.log('rqst:'+request.url);
+//console.log('rqst:'+request.url);
     let contentType = 'text/html';
     if (!!request.url.match(/.*\.css$/)) {
         contentType = 'text/css';

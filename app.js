@@ -13,7 +13,7 @@ http.createServer(function(request, response) {
         pathname = pathname.substring(0, pathname.length - 1);
     }
 
-    console.log('Requested: ' + pathname);
+    //console.log('Requested: ' + pathname);
 
     request.addListener('data', function(chunk) {
         postData += chunk;
