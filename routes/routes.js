@@ -23,5 +23,10 @@ module.exports = [
         pattern: '/publics/.*',
         methods: ['GET'],
         action: 'extfile::getFile'
+    },
+    {
+        pattern: '/app-front/.*',
+        methods: ['GET'],
+        action: 'extfile::getFile'
     }
 ];
