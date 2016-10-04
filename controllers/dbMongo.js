@@ -1,7 +1,7 @@
 'use strict'
 let dbM = require('mongodb');
 let dbClient = require('mongodb').MongoClient;
-let dbPath = 'mongodb://127.0.0.1:27017/epam-task-app2';
+let dbPath = 'mongodb://127.0.0.1:27018/epam-task-app2';
 let assert = require('assert');
 
 exports.echo = function() {

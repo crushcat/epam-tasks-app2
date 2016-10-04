@@ -4,7 +4,8 @@ var projectDir = __dirname,
         controllers: projectDir + '/controllers',
         templates: projectDir + '/templates',
         routes: projectDir + '/routes',
-        extfile: projectDir + '/publics' 
+        extfile: projectDir + '/publics',
+        publicfile: projectDir + '/public'
     };
 
 var Config = {
@@ -20,7 +21,8 @@ var Config = {
         home: directories.controllers + '/home',
         form: directories.controllers + '/form',
         items: directories.controllers + '/items',
-        extfile: directories.controllers + '/extfile'
+        extfile: directories.controllers + '/extfile',
+        publicfile: directories.controllers + '/publicfile'
     },
 
     getController: function(name) {

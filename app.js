@@ -1,14 +1,14 @@
 'use strict';
 let http = require('http'),
-    url = require('url'),
-    router = require('./router');
+url = require('url'),
+router = require('./router');
 
 http.createServer(function(request, response) {
     let postData = '', pathname;
 
     request.setEncoding('utf8');
     pathname = url.parse(request.url).pathname.trim().toLowerCase();
-   
+
     if (pathname.lastIndexOf('/') === pathname.length - 1) {
         pathname = pathname.substring(0, pathname.length - 1);
     }

@@ -23,5 +23,10 @@ module.exports = [
         pattern: '/publics/.*',
         methods: ['GET'],
         action: 'extfile::getFile'
+    },
+    {
+        pattern: '/public/.*',
+        methods: ['GET'],
+        action: 'publicfile::getFile'
     }
 ];
