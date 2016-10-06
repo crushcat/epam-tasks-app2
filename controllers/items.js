@@ -14,6 +14,7 @@ exports.getAction = function(request, response) {
             });
             resJ = JSON.stringify(resArray);
             response.end(resJ);
+            console.log('get: '+JSON.stringify(resArray));
         })
         .catch((err) => {
             console.log(err);
@@ -22,7 +23,7 @@ exports.getAction = function(request, response) {
 
 exports.postAction = function(request, response, pathname, postData) {
     postData = qs.parse(postData);
-
+    //console.log('postdata= '+postData);
     db.insert(postData)
         .then((resIns) => {
             response.writeHead(200, {
@@ -45,13 +46,21 @@ exports.postAction = function(request, response, pathname, postData) {
 exports.deleteAllAction = function(request, response, pathname) {
 
     let deleteId = qs.parse(request.url.trim().replace(/.*\?/, '')).id;
-
+    //console.log('delete: '+ deleteId);
     db.delete(deleteId)
         .then((resDel) => {
-            response.writeHead(200, {
-                'Content-Type': 'application/json'
-            });
-            response.end(JSON.stringify(deleteId));
+            let resJ = '';
+            db.getAll()
+                .then((resArray) => {
+                    response.writeHead(200, {
+                        'Content-Type': 'application/json'
+                    });
+                    resJ = JSON.stringify(resArray);
+                    response.end(resJ);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
         })
         .catch((err) => {
             console.log(err);

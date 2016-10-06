@@ -5,7 +5,8 @@ angular.module('listService', [])
                 return $http.get('/items');
             },
             delete : function(id) {
-                return $http.delete('/items' + id);
+                //console.log('cDelete- '+id);
+                return $http.delete('/items?id=' + id);
             }
         }
     });

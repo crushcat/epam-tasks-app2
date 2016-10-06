@@ -19,36 +19,51 @@
     <!-- SPELLS -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
-    <script src="core.js"></script>
+    <!--script src="core.js"></script-->
+    <script src='./app/app.module.js'></script>
+    <script src='./app/components/form/formController.js'></script>
+    <script src='./app/components/form/formService.js'></script>
+    <script src='./app/components/list/listController.js'></script>
+    <script src='./app/components/list/listService.js'></script>
+    
 
 </head>
 <!-- SET THE CONTROLLER AND GET ALL TODOS -->
-<body ng-controller="mainController">
-    <div class="container">
-         <!-- FORM  -->
-        <div id="todo-form" class="row">
-            <div class="col-sm-8 col-sm-offset-2 text-center">
-                <form>
-                    <div class="form-group">
-
-                        <!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
-                        <input type="text" class="form-control input-lg text-center" placeholder="I want to buy a puppy that will love me forever" ng-model="formData.text">
-                    </div>
-
-                    <!-- createToDo() WILL CREATE NEW TODOS -->
-                    <button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Add</button>
-                </form>
-            </div>
-        </div>
-        <!-- LIST -->
-        <div id="todo-list" class="row">
-            <div class="col-sm-4 col-sm-offset-4">
-                <div class="checkbox" ng-repeat="person in persons">
-                    <label>
-                        <input type="checkbox" ng-click="deletePerson(person._id)"> /-/ {{person._id}} /-/ {{person.email}} /-/ {{person.phone}} /-/
+<body>
+    <div  ng-controller="pFormController">
+        <form id="itemForm" name="itemsForm"  class='itemsForm'>
+            <fieldset>
+                <legend>Add Item</legend>
+                <div id='fName' class='input-wrapper'>
+                    <label for = 'iName'>Name:</label>
+                    <input id ='iName' type="text" name="name" placeholder="Input Name" ng-model="formData.name"/>
                 </div>
-            </div>
-        </div>
+                <div id = 'fEmail' class='input-wrapper'>
+                    <label for = 'iEmail'>Email:</label>
+                    <input id = 'iEmail' type="text" name="email" placeholder="your@email.com" ng-model="formData.email"/>
+                </div>
+                <div id = 'fPhone' class='input-wrapper'>
+                    <label for = 'iPhone'>Phone:</label>
+                    <input  id = 'iPhone' type="text" name="phone" placeholder="+375ZZXXXYYYY" ng-model="formData.phone"/>
+                </div>
+                <button type="submit" ng-click='createPerson()'>Submit</button>
+            </fieldset>
+        </form>
+    </div>
+    <div ng-controller="pListController">
+            <table class="table">
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                </tr>
+                <tr ng-repeat='person in persons'>
+                    <td ng-click="deletePerson(person._id)">{{$index + 1}}</td>
+                    <td>{{person.name}}</td>
+                    <td>{{person.email}}</td>
+                    <td>{{person.phone}}</td>
+            </table>
     </div>
 
 </body>
