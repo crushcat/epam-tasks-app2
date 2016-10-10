@@ -1,15 +1,15 @@
 <!doctype html>
 
-<html ng-app="personList">
+<html ng-app='personList'>
 <head>
     <!-- META -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'><!-- Optimize mobile viewport -->
 
     <title>Node/Angular Todo App</title>
 
     <!-- SCROLLS -->
-    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
+    <link rel='stylesheet' href='http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css'><!-- load bootstrap -->
     <style>
         html                    { overflow-y:scroll; }
         body                    { padding-top:50px; }
@@ -17,9 +17,9 @@
     </style>
 
     <!-- SPELLS -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
-    <!--script src="core.js"></script-->
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js'></script><!-- load jquery -->
+    <script src='http://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js'></script><!-- load angular -->
+    <!--script src='core.js'></script-->
     <script src='./app/app.module.js'></script>
     <script src='./app/components/form/formController.js'></script>
     <script src='./app/components/form/formService.js'></script>
@@ -30,36 +30,43 @@
 </head>
 <!-- SET THE CONTROLLER AND GET ALL TODOS -->
 <body>
-    <div  ng-controller="pFormController">
-        <form id="itemForm" name="itemsForm"  class='itemsForm'>
+    <div  ng-controller='pFormController'>
+        <form id='itemForm' name='itemsForm'  class='form-horizontal'>
             <fieldset>
                 <legend>Add Item</legend>
-                <div id='fName' class='input-wrapper'>
-                    <label for = 'iName'>Name:</label>
-                    <input id ='iName' type="text" name="name" placeholder="Input Name" ng-model="formData.name"/>
+                <div class='form-group'>
+                    <label for = 'iName' class='col-sm-2 control-label'>Name:</label>
+                    <div class='col-sm-10'>
+                        <input id ='iName' type='text' class='form-control' placeholder='Input Name' ng-model='formData.name' required/>
+                    </div>
                 </div>
-                <div id = 'fEmail' class='input-wrapper'>
-                    <label for = 'iEmail'>Email:</label>
-                    <input id = 'iEmail' type="text" name="email" placeholder="your@email.com" ng-model="formData.email"/>
+                <div class='form-group'>
+                    <label for = 'iEmail' class='col-sm-2 control-label'>Email:</label>
+                    <div class='col-sm-10'>
+                        <input id ='iEmail' type='email' class='form-control' placeholder='your@email.com' ng-model='formData.email' required/>
+                    </div>
                 </div>
-                <div id = 'fPhone' class='input-wrapper'>
-                    <label for = 'iPhone'>Phone:</label>
-                    <input  id = 'iPhone' type="text" name="phone" placeholder="+375ZZXXXYYYY" ng-model="formData.phone"/>
+                <div class='form-group'>
+                    <label for = 'iPhone' class='col-sm-2 control-label'>Phone:</label>
+                    <div class='col-sm-10'>
+                        <input id ='iPhone' type='text' class='form-control' placeholder='+375ZZXXXYYYY' ng-model='formData.phone' required/>
+                    </div>
                 </div>
-                <button type="submit" ng-click='createPerson()'>Submit</button>
+                <button type='submit' ng-click='createPerson()' class='btn btn-primary btn-lg btn-block'>Submit</button>
             </fieldset>
         </form>
     </div>
-    <div ng-controller="pListController">
-            <table class="table">
+
+    <div ng-controller='pListController'>
+            <table class='table'>
                 <tr>
                     <th>#</th>
                     <th>Name</th>
-                    <th>Phone</th>
                     <th>Email</th>
+                    <th>Phone</th>
                 </tr>
                 <tr ng-repeat='person in persons'>
-                    <td ng-click="deletePerson(person._id)">{{$index + 1}}</td>
+                    <td ng-click='deletePerson(person._id)'>{{$index + 1}}</td>
                     <td>{{person.name}}</td>
                     <td>{{person.email}}</td>
                     <td>{{person.phone}}</td>

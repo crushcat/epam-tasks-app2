@@ -7,12 +7,7 @@ angular.module('listController', [])
             .success(function(data) {
                 $scope.persons = data;
             });
-        $scope.getAll = function(){
-            persons.get()
-            .success(function(data) {
-                $scope.persons = data;
-            });
-        };
+        
         $scope.$on('created', function(event, msg){
             persons.get()
             .success(function(data) {
