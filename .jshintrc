@@ -1,0 +1,33 @@
+{
+  "asi": true,
+  "bitwise": false,
+  "browser": true,
+  "curly": true,
+  "devel": true,
+  "eqeqeq": true,
+  "esversion": 6,
+  "expr": true,
+  "forin": true,
+  "immed": true,
+  "indent": 4,
+  "latedef": "nofunc",
+  "maxdepth": 3,
+  "maxlen": 120,
+  "moz": true,
+  "newcap": true,
+  "noarg": true,
+  "noempty": true,
+  "node": true,
+  "nonbsp": true,
+  "noyield": true,
+  "predef": [],
+  "quotmark": "single",
+  "strict": true,
+  "sub": true,
+  "unused": true,
+  "undef": true,
+  "varstmt": true,
+  "globals": {
+        "angular": false
+    }
+}

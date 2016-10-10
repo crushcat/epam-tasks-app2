@@ -14,7 +14,7 @@ exports.getAction = function(request, response) {
             });
             resJ = JSON.stringify(resArray);
             response.end(resJ);
-            console.log('get: '+JSON.stringify(resArray));
+            //console.log('get: '+JSON.stringify(resArray));
         })
         .catch((err) => {
             console.log(err);

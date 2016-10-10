@@ -1,3 +1,4 @@
+'use strict'
 angular.module('listService', [])
     .factory('persons', function($http) {
         return {

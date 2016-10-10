@@ -28,7 +28,22 @@ exports.insert = function(obj){
             if (err) {
                 reject(err)
             } else{
-                let resIns = db.collection('usercollection').insertOne(obj);
+                let resIns = '';
+                if(obj.hasOwnProperty('_id')){
+                     resIns = db.collection('usercollection').update(
+                        {_id:obj._id},
+                        {
+                            name: obj.name,
+                            email: obj.email,
+                            phone: obj.phone
+                        },
+                        { upsert: false }
+                        );
+                }
+                else{
+                     resIns = db.collection('usercollection').insertOne(obj);
+                }
+                
                 close(db);
                 resolve(resIns);
             }
